@@ -26,9 +26,7 @@ export class Web3Component extends React.Component {
 
   public getWalletFactory() {
     const web3 = this.getWeb3();
-    return new web3.eth.Contract(
-      Contracts.BillableWalletFactory.spec.abi,
-      Contracts.BillableWalletFactory.address
-    );
+    const contractAddress = process.env.REACT_APP_BILLABLE_WALLET_FACTORY || Contracts.BillableWalletFactory.address;
+    return new web3.eth.Contract(Contracts.BillableWalletFactory.spec.abi, contractAddress);
   }
 }
