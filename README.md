@@ -1,15 +1,19 @@
 # Getting Started
 
-To run use lerna:
+You will need three terminals
+
+terminal 1
 
 ```
-npm install -g lerna
-lerna bootstrap
+cd packages/eth-atl-billing-contracts
+npm run serve
 ```
 
-or if you don't want lerna globally
+terminal 2
 
 ```
-npm install
-./node_modules/.bin/lerna bootstrap
+cd packages/eth-atl-billing-contracts
+npm run deploy
+cd ../packages/eth-atl-billing-frontend-react
+npm start
 ```

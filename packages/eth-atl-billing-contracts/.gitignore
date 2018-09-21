@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-node_modules/**
-=======
 
 *.csv
 *.dat
@@ -24,4 +21,6 @@ npm-debug.log
 dist
 src/vendor
 src/dist
->>>>>>> 4d2f453863a05bcd900ad503e02cfc2ee251ba0b
+blockchain/build
+types/generated
+ts_build
