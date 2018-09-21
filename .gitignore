@@ -21,5 +21,3 @@ npm-debug.log
 dist
 src/vendor
 src/dist
-blockchain/build
-types/generated

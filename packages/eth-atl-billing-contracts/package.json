@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "compile:contract": "cd ./blockchain && ../node_modules/.bin/truffle compile",
-    "compile:contract:types": "./node_modules/.bin/typechain --target=web3-1.0.0 --outDir types blockchain/contracts/build/**/*.json",
+    "compile:contract:types": "./node_modules/.bin/typechain --target=web3-1.0.0 --outDir types/generated ./blockchain/build/contracts/**/*.json",
     "compile": "npm run compile:contract && npm run compile:contract:types",
     "test": "cd ./blockchain && ./node_modules/.bin/truffle test"
   },
