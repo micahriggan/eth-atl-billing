@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "lib": ["es5", "es6"],
+    "noImplicitAny": false,
+    "removeComments": true,
+    "resolveJsonModule": true,
+    "declaration": true,
+    "module": "commonjs",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "target": "es5",
+    "typeRoots": ["./node_modules/@types", "./src/contracts"],
+    "baseUrl": ".",
+    "paths": {
+      "*": ["*", "./src/*"]
+    },
+    "outDir": "ts_build",
+    "sourceMap": true
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
+}

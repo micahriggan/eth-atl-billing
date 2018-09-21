@@ -2,16 +2,22 @@
   "name": "eth-atl-billing-contracts",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./ts_build/index.js",
+  "types": "./ts_build/index.d.ts",
   "scripts": {
+    "serve": "./node_modules/.bin/ganache-cli",
+    "deploy": "cd blockchain && ../node_modules/.bin/truffle migrate",
+    "compile:code": "./node_modules/.bin/tsc",
     "compile:contract": "cd ./blockchain && ../node_modules/.bin/truffle compile",
-    "compile:contract:types": "./node_modules/.bin/typechain --target=web3-1.0.0 --outDir types blockchain/contracts/build/**/*.json",
-    "compile": "npm run compile:contract && npm run compile:contract:types",
+    "compile:contract:types": "./node_modules/.bin/typechain --target=web3-1.0.0 --outDir src/contracts/ ./blockchain/build/contracts/**/*.json",
+    "compile": "npm run compile:contract && npm run compile:contract:types && npm run compile:code",
     "test": "cd ./blockchain && ./node_modules/.bin/truffle test"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/web3": "^1.0.6",
+    "ganache-cli": "^6.1.8",
     "truffle": "^4.1.14",
     "typechain": "^0.3.5"
   }
