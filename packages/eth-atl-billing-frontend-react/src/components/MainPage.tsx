@@ -11,7 +11,7 @@ export class MainPage extends React.Component {
   public render() {
     return (
       <div>
-        <Link to='/consumer'>I want a billable wallet</Link>
+        <Link to='/consumer/create'>I want a billable wallet</Link>
         <br/>
         <Link to='/merchant/create'>I want to accept recurring payments in ethereum</Link>
       </div>
