@@ -15,7 +15,6 @@ import { MerchantPastBills } from "./components/merchant/PastBill";
 import { MerchantFutureBills } from './components/merchant/PendingBill';
 import { RedeemBillToken } from "./components/merchant/RedeemBillToken";
 
-
 const customHistory = createBrowserHistory();
 
 class App extends React.Component {
