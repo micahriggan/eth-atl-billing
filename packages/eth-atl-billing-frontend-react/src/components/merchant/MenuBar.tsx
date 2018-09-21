@@ -9,6 +9,9 @@ import { Link } from 'react-router-dom';
     public render(){
       return (
           <ul>
+               <li>
+                  <Link to="/merchant">Overview</Link>
+              </li>
               <li>
                   <Link to="/merchant/pending">Pending Bills</Link>
               </li>

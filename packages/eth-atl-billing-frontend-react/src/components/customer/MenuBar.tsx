@@ -10,6 +10,9 @@ import { Link } from 'react-router-dom';
       return (
           <ul>
               <li>
+                  <Link to="/customer">Overview</Link>
+              </li>
+              <li>
                   <Link to="/customer/deposit">Deposit</Link>
               </li>
               <li>
