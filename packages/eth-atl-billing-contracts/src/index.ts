@@ -1,7 +1,7 @@
 export const Contracts = {
   BillableWalletFactory: {
     spec: require("../blockchain/build/contracts/BillableWalletFactory.json"),
-    address: "0xf5cd081e313df55903ba6495ca24e31b5fed049f"
+    address: "0x9b11ae1facef338931fcf5e35afb0cd388e94ff7"
   },
   BillableWallet: {
     spec: require("../blockchain/build/contracts/BillableWallet.json"),
