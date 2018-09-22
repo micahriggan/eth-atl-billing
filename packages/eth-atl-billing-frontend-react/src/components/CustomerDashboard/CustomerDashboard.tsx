@@ -2,14 +2,14 @@ import * as React from "react";
 
 import { Redirect } from "react-router";
 import { PendingBillsContainer } from "../../containers/pending-bills/PendingBills";
+import { Layout } from "../Layout";
 import { Web3Component } from "../Web3Component";
-import { Layout } from "./CustomerLayout";
 
 interface IState {
   walletAddress: string;
   balance: string;
 }
-export class Overview extends Web3Component<any, IState> {
+export class CustomerDashboard extends Web3Component<any, IState> {
   public state: IState = {
     balance: "0",
     walletAddress: ""
