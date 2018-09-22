@@ -1,4 +1,6 @@
 pragma solidity ^0.4.23;
+import "./ERC20.sol";
+import "./BillableWalletFactory.sol";
 
 contract BillableWallet {
 
@@ -7,6 +9,7 @@ contract BillableWallet {
     address biller;
     uint createdAt;
     bool paid;
+    address token;
   }
 
   struct Authorization {
@@ -17,27 +20,28 @@ contract BillableWallet {
   struct BillerProfile {
     uint lastBilled;
     uint lastPaid;
-    uint lastAuthorized;
   }
 
   address public owner;
+  BillableWalletFactory public wFactory;
 
   Bill[] public bills;
-  mapping(address => Authorization) public authorizations;
-  mapping(address => BillerProfile) public billerProfiles;
+  mapping(address => mapping(address => Authorization)) public billerTokenAuthorizations;
+  mapping(address => mapping(address => BillerProfile)) public billerTokenProfiles;
 
   event BillPaid(address biller, uint amount, uint time);
   event Deposit(address from, uint amount, uint time);
 
 
-  constructor(address creator) public {
+  constructor(address creator, address factory) public {
     owner = creator;
+    wFactory = BillableWalletFactory(factory);
   }
 
-  function authorizedFor(uint amount, address biller) view public returns(bool) {
-    BillerProfile storage billerProfile = billerProfiles[biller];
-    Authorization storage auth = authorizations[biller];
-    uint lastBillTime = billerProfile.lastAuthorized;
+  function authorizedFor(uint amount, address biller, address token) view public returns(bool) {
+    BillerProfile storage billerProfile = billerTokenProfiles[biller][token];
+    Authorization storage auth = billerTokenAuthorizations[biller][token];
+    uint lastBillTime = billerProfile.lastBilled;
     uint waitTime = auth.waitTime;
     uint minTime = lastBillTime + waitTime;
     return now >= minTime && amount <= auth.amount;
@@ -48,20 +52,42 @@ contract BillableWallet {
   }
 
   function markPaid(uint pendingBillIndex) internal returns(bool paid) {
-    require(bills[pendingBillIndex].paid == false, "Can't double pay");
-    bills[pendingBillIndex].paid = true;
-    billerProfiles[bills[pendingBillIndex].biller].lastPaid = now;
-    emit BillPaid(bills[pendingBillIndex].biller, bills[pendingBillIndex].amount, now);
+    Bill storage foundBill = bills[pendingBillIndex];
+    require(foundBill.paid == false, "Can't double pay");
+    foundBill.paid = true;
+    billerTokenProfiles[foundBill.biller][foundBill.token].lastPaid = now;
+    emit BillPaid(foundBill.biller, foundBill.amount, now);
     return true;
   }
 
-  function bill(uint amount) external returns(bool) {
-    billerProfiles[msg.sender].lastBilled = now;
-    bills.push(Bill(amount, msg.sender, now, false));
-    if(authorizedFor(amount, msg.sender) && address(this).balance >= amount) {
-      billerProfiles[msg.sender].lastAuthorized = now;
+  function getBalance(address token) public view returns (uint balance) {
+    if(token == 0x0) {
+      return address(this).balance;
+    } else {
+      return ERC20Interface(token).balanceOf(address(this));
+    }
+  }
+
+  function internalSend(address to, uint amount, address token) private returns(bool success) {
+    if(token == 0x0) {
+      return to.send(amount);
+    } else {
+      return ERC20Interface(token).transfer(to, amount);
+    }
+  }
+
+  function bill(uint amount, address token) external returns(bool) {
+    billerTokenProfiles[msg.sender][token].lastBilled = now;
+    bills.push(Bill({
+      amount: amount,
+      biller: msg.sender,
+      createdAt: now,
+      paid: false,
+      token: token
+    }));
+    if(authorizedFor(amount, msg.sender, token) && getBalance(token) >= amount) {
       require(markPaid(bills.length -1), "Saving payment failed");
-      msg.sender.transfer(amount);
+      require(internalSend(msg.sender, amount, token), "Payment must succeed");
       return true;
     }
     return false;
@@ -73,19 +99,20 @@ contract BillableWallet {
   }
 
   function approve(uint pendingBillIndex) public ownerOnly {
-    uint billAmt = bills[pendingBillIndex].amount;
-    if(msg.sender == owner && address(this).balance >= billAmt) {
+    Bill memory foundBill = bills[pendingBillIndex];
+    if(msg.sender == owner && address(this).balance >= foundBill.amount) {
       markPaid(pendingBillIndex);
-      msg.sender.transfer(billAmt);
+      require(internalSend(foundBill.biller, foundBill.amount, foundBill.token), "Payment must succeed");
     }
   }
 
-  function authorize(address biller, uint amount, uint waitTime ) public ownerOnly {
-    authorizations[biller] = Authorization(amount, waitTime);
+  function authorize(address biller, uint amount, uint waitTime, address token ) public ownerOnly {
+    billerTokenAuthorizations[biller][token] = Authorization(amount, waitTime);
+    wFactory.emitBillerAuthorization(biller, amount, token, true);
   }
 
-  function send(uint amount, address to) public ownerOnly {
-    to.transfer(amount);
+  function send(address to, uint amount, address token) public ownerOnly {
+    require(internalSend(to, amount, token), "Payment must succeed");
   }
 
   function () public payable {
@@ -95,9 +122,4 @@ contract BillableWallet {
   function deposit() public payable {
     emit Deposit(msg.sender, msg.value, now);
   }
-
-  function balance() public view returns(uint) {
-    return address(this).balance; 
-  }
 }
-
