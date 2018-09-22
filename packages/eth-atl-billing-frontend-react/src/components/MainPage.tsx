@@ -2,15 +2,17 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 
 import { Card, Image } from "semantic-ui-react";
+import { Layout } from "./Layout";
+import { Web3Component } from "./Web3Component";
 
-export class MainPage extends React.Component {
+export class MainPage extends Web3Component {
   public constructor(props: any) {
     super(props);
   }
 
   public render() {
     return (
-      <div>
+      <Layout>
         <Card>
           <Image src="/images/avatar/large/matthew.png" />
           <Card.Content>
@@ -32,7 +34,7 @@ export class MainPage extends React.Component {
             <Link to="/merchant/create">I want to accept recurring payments</Link>
           </Card.Content>
         </Card>
-      </div>
+      </Layout>
     );
   }
 }

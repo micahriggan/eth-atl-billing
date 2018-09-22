@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Web3Component } from "../Web3Component";
-
-import { MenuBar } from "./MenuBar";
+import { Layout } from "./CustomerLayout";
 
 export class CreateWallet extends Web3Component {
   public constructor(props: any) {
@@ -20,10 +19,9 @@ export class CreateWallet extends Web3Component {
 
   public render() {
     return (
-      <div>
-        <MenuBar />
+      <Layout>
         <button onClick={this.createWallet}>Create Customer Wallet</button>
-      </div>
+      </Layout>
     );
   }
 }

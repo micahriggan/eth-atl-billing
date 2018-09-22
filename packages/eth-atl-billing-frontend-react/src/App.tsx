@@ -27,7 +27,7 @@ class App extends React.Component {
           <Route exact={true} path="/merchant/create" component={CreateMerchantWallet} />
           <Route exact={true} path="/merchant/pending" component={MerchantFutureBills} />
           <Route exact={true} path="/merchant/past" component={MerchantPastBills} />
-          <Route exact={true} path="/merchant/reedemToken" component={RedeemBillToken} />
+          <Route exact={true} path="/merchant/redeemToken" component={RedeemBillToken} />
           <Route exact={true} path="/customer" component={CustomerOverview} />
           <Route exact={true} path="/customer/create" component={CreateCustomerWallet} />
           <Route exact={true} path="/customer/deposit" component={Deposit} />

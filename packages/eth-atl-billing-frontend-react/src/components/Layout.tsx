@@ -1,9 +1,15 @@
 import * as React from "react";
-import { Container } from 'semantic-ui-react'
-import { Web3Component } from "./Web3Component";
+import { Container } from "semantic-ui-react";
 
-export class Layout extends Web3Component {
+export class Layout extends React.Component{
+  constructor(props: any) {
+    super(props);
+  }
   public render() {
-    return <Container>{this.props.children}</Container>;
+    return (
+      <Container>
+        {this.props.children}
+      </Container>
+    );
   }
 }

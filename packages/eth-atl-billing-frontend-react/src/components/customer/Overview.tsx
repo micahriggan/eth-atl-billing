@@ -1,19 +1,19 @@
 import * as React from "react";
 
-import { MenuBar } from "./MenuBar";
+import { Web3Component } from "../Web3Component";
+import { Layout } from "./CustomerLayout";
 
-export class Overview extends React.Component {
+export class Overview extends Web3Component {
   public constructor(props: any) {
     super(props);
   }
   public render() {
     return (
-      <div>
-        <MenuBar />
+      <Layout>
         <h3>Wallet</h3>
         <h4>Amount: </h4>
         <h4>Value: </h4>
-      </div>
+      </Layout>
     );
   }
 }

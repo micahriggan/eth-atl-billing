@@ -1,17 +1,17 @@
 import * as React from "react";
 
-import { MenuBar } from "./MenuBar";
+import { Layout } from "../merchant/MerchantLayout";
+import { Web3Component } from "../Web3Component";
 
-export class Withdraw extends React.Component {
+export class Withdraw extends Web3Component {
   public constructor(props: any) {
     super(props);
   }
   public render() {
     return (
-      <div>
-        <MenuBar />
+      <Layout>
         <h3>Withdraw</h3>
-      </div>
+      </Layout>
     );
   }
 }

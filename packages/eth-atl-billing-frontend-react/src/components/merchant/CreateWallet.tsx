@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { MenuBar } from "./MenuBar";
+import { Layout } from "./MerchantLayout";
 
 export class CreateWallet extends React.Component {
   public constructor(props: any) {
@@ -8,10 +8,9 @@ export class CreateWallet extends React.Component {
   }
   public render() {
     return (
-      <div>
-        <MenuBar />
+      <Layout>
         <button>Create Merchant Wallet</button>
-      </div>
+      </Layout>
     );
   }
 }

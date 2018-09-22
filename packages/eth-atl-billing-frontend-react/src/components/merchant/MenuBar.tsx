@@ -2,8 +2,9 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 
 import { Icon, Menu } from "semantic-ui-react";
+import { Web3Component } from "../Web3Component";
 
-export class MenuBar extends React.Component {
+export class MenuBar extends Web3Component {
   public state: { activeItem?: string } = {};
   public constructor(props: any) {
     super(props);
