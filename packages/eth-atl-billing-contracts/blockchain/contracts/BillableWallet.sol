@@ -26,6 +26,7 @@ contract BillableWallet {
   BillableWalletFactory public wFactory;
 
   Bill[] public bills;
+
   mapping(address => mapping(address => Authorization)) public billerTokenAuthorizations;
   mapping(address => mapping(address => BillerProfile)) public billerTokenProfiles;
 
@@ -109,6 +110,11 @@ contract BillableWallet {
   function authorize(address biller, uint amount, uint waitTime, address token ) public ownerOnly {
     billerTokenAuthorizations[biller][token] = Authorization(amount, waitTime);
     wFactory.emitBillerAuthorization(biller, amount, token, true);
+  }
+
+  function revoke(address biller, address token) public ownerOnly {
+    billerTokenAuthorizations[biller][token] = Authorization(0, 0);
+    wFactory.emitBillerAuthorization(biller, amount, token, false);
   }
 
   function send(address to, uint amount, address token) public ownerOnly {
