@@ -2,7 +2,7 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 
 import { Card, Container, Grid, Image } from "semantic-ui-react";
-import { Web3Component } from "./Web3Component";
+import { Web3Component } from "../Web3Component";
 
 export class MainPage extends Web3Component {
   public constructor(props: any) {
@@ -21,7 +21,7 @@ export class MainPage extends Web3Component {
                 <Card.Description>Create a wallet that allows you to make recurring payments</Card.Description>
               </Card.Content>
               <Card.Content extra={true}>
-                <Link to="/customer/create">I want a billable wallet</Link>
+                <Link to="/customer">I want a billable wallet</Link>
               </Card.Content>
             </Card>
           </Container>
@@ -36,7 +36,7 @@ export class MainPage extends Web3Component {
                 <Card.Description>Accept recurring ethereum payments</Card.Description>
               </Card.Content>
               <Card.Content extra={true}>
-                <Link to="/merchant/create">I want to accept recurring payments</Link>
+                <Link to="/merchant">I want to accept recurring payments</Link>
               </Card.Content>
             </Card>
           </Container>

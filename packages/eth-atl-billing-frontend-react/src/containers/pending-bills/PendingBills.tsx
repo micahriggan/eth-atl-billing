@@ -1,5 +1,5 @@
 import * as React from "react";
-import { IBill, PendingBills } from "../../components/pending-bills/PendingBills";
+import { IBill, PendingBills } from "../../components/PendingBills/PendingBills";
 import { Web3Component } from "../../components/Web3Component";
 import { AddBillerContainer } from "../add-biller/AddBiller";
 import { BillCreationContainer } from "../bill-creation/BillCreation";
