@@ -12,7 +12,7 @@ export class MainPage extends Web3Component {
     const account = accounts[0];
     const tx = await this.getWalletFactory()
       .methods.createWallet()
-      .send({from: account});
+      .send({ from: account });
     window.console.log(tx);
   }
 
