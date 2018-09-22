@@ -9,7 +9,7 @@
     "deploy": "cd blockchain && ../node_modules/.bin/truffle migrate",
     "compile:code": "./node_modules/.bin/tsc",
     "compile:contract": "cd ./blockchain && ../node_modules/.bin/truffle compile",
-    "compile:contract:types": "./node_modules/.bin/typechain --target=web3-1.0.0 --outDir src/contracts/ ./blockchain/build/contracts/**/*.json",
+    "compile:contract:types": "./node_modules/.bin/typechain --target=web3-1.0.0 --outDir ./types ./blockchain/build/contracts/**/*.json",
     "compile": "npm run compile:contract && npm run compile:contract:types && npm run compile:code",
     "test": "cd ./blockchain && ./node_modules/.bin/truffle test"
   },

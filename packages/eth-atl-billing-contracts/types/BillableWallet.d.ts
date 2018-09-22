@@ -11,18 +11,22 @@ export class BillableWallet {
   constructor(jsonInterface: any[], address?: string, options?: CustomOptions);
   options: contractOptions;
   methods: {
-    paidBills(
+    bills(
       arg0: number | string
-    ): TransactionObject<{ 0: string; 1: string; 2: string }>;
+    ): TransactionObject<{ 0: string; 1: string; 2: string; 3: boolean }>;
 
-    pendingBills(
-      arg0: number | string
+    authorizations(arg0: string): TransactionObject<{ 0: string; 1: string }>;
+
+    billerProfiles(
+      arg0: string
     ): TransactionObject<{ 0: string; 1: string; 2: string }>;
 
     authorizedFor(
       amount: number | string,
       biller: string
     ): TransactionObject<boolean>;
+
+    isPaid(pendingBillIndex: number | string): TransactionObject<boolean>;
 
     bill(amount: number | string): TransactionObject<boolean>;
 
@@ -36,13 +40,34 @@ export class BillableWallet {
 
     send(amount: number | string, to: string): TransactionObject<void>;
 
+    deposit(): TransactionObject<void>;
+
     owner(): TransactionObject<string>;
+    balance(): TransactionObject<string>;
   };
   deploy(options: {
     data: string;
     arguments: any[];
   }): TransactionObject<Contract>;
   events: {
+    BillPaid(
+      options?: {
+        filter?: object;
+        fromBlock?: BlockType;
+        topics?: string[];
+      },
+      cb?: Callback<EventLog>
+    ): EventEmitter;
+
+    Deposit(
+      options?: {
+        filter?: object;
+        fromBlock?: BlockType;
+        topics?: string[];
+      },
+      cb?: Callback<EventLog>
+    ): EventEmitter;
+
     allEvents: (
       options?: {
         filter?: object;

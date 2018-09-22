@@ -6,6 +6,7 @@ contract BillableWallet {
     uint amount;
     address biller;
     uint createdAt;
+    bool paid;
   }
 
   struct Authorization {
@@ -21,10 +22,12 @@ contract BillableWallet {
 
   address public owner;
 
-  Bill[] public pendingBills;
-  Bill[] public paidBills;
-  mapping(address => Authorization) authorizations;
-  mapping(address => BillerProfile) billerProfiles;
+  Bill[] public bills;
+  mapping(address => Authorization) public authorizations;
+  mapping(address => BillerProfile) public billerProfiles;
+
+  event BillPaid(address biller, uint amount, uint time);
+  event Deposit(address from, uint amount, uint time);
 
 
   constructor(address creator) public {
@@ -40,22 +43,24 @@ contract BillableWallet {
     return now >= minTime && amount <= auth.amount;
   }
 
-  function markPaid(uint pendingBillIndex) internal {
-    uint length = pendingBills.length;
-    Bill storage paidBill = pendingBills[pendingBillIndex];
-    pendingBills[pendingBillIndex] = pendingBills[length - 1];
-    delete pendingBills[length - 1];
-    pendingBills.length--;
-    paidBills.push(paidBill);
-    billerProfiles[paidBill.biller].lastPaid = now;
+  function isPaid(uint pendingBillIndex) public view returns(bool) {
+    return bills[pendingBillIndex].paid;
+  }
+
+  function markPaid(uint pendingBillIndex) internal returns(bool paid) {
+    require(bills[pendingBillIndex].paid == false, "Can't double pay");
+    bills[pendingBillIndex].paid = true;
+    billerProfiles[bills[pendingBillIndex].biller].lastPaid = now;
+    emit BillPaid(bills[pendingBillIndex].biller, bills[pendingBillIndex].amount, now);
+    return true;
   }
 
   function bill(uint amount) external returns(bool) {
     billerProfiles[msg.sender].lastBilled = now;
-    pendingBills.push(Bill(amount, msg.sender, now));
-    if(authorizedFor(amount, msg.sender) && address(this).balance > amount) {
+    bills.push(Bill(amount, msg.sender, now, false));
+    if(authorizedFor(amount, msg.sender) && address(this).balance >= amount) {
       billerProfiles[msg.sender].lastAuthorized = now;
-      markPaid(pendingBills.length -1);
+      require(markPaid(bills.length -1), "Saving payment failed");
       msg.sender.transfer(amount);
       return true;
     }
@@ -68,8 +73,8 @@ contract BillableWallet {
   }
 
   function approve(uint pendingBillIndex) public ownerOnly {
-    uint billAmt = pendingBills[pendingBillIndex].amount;
-    if(msg.sender == owner && address(this).balance > billAmt) {
+    uint billAmt = bills[pendingBillIndex].amount;
+    if(msg.sender == owner && address(this).balance >= billAmt) {
       markPaid(pendingBillIndex);
       msg.sender.transfer(billAmt);
     }
@@ -82,4 +87,17 @@ contract BillableWallet {
   function send(uint amount, address to) public ownerOnly {
     to.transfer(amount);
   }
+
+  function () public payable {
+    deposit();
+  }
+
+  function deposit() public payable {
+    emit Deposit(msg.sender, msg.value, now);
+  }
+
+  function balance() public view returns(uint) {
+    return address(this).balance; 
+  }
 }
+
