@@ -11,14 +11,14 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "target": "es5",
-    "typeRoots": ["./node_modules/@types", "./src/contracts"],
+    "typeRoots": ["./node_modules/@types", "./types"],
     "baseUrl": ".",
     "paths": {
-      "*": ["*", "./src/*"]
+      "*": ["*", "./src/*", "./types/*"]
     },
     "outDir": "ts_build",
     "sourceMap": true
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "ts_build"]
 }

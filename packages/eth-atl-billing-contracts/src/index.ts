@@ -9,4 +9,10 @@ export const Contracts = {
   }
 };
 
+import { BillableWalletFactory } from "../types/BillableWalletFactory";
+import { BillableWallet } from "../types/BillableWallet";
 
+export namespace BillableWalletTypes {
+  export type Wallet = BillableWallet;
+  export type Factory = BillableWalletFactory;
+}
