@@ -7,8 +7,9 @@ import {MenuBar} from './MenuBar';
   
     public constructor(props: any){
       super(props);
+      this.createWallet = this.createWallet.bind(this);
     }
-    
+
     public async createWallet() {
         const accounts = await this.getAccounts();
         const account = accounts[0];

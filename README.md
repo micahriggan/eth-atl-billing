@@ -15,5 +15,5 @@ terminal 2
 cd packages/eth-atl-billing-contracts
 npm run deploy
 cd ../packages/eth-atl-billing-frontend-react
-npm start
+./start.sh
 ```
