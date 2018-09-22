@@ -14,9 +14,11 @@ export class MenuBar extends React.Component {
     const { activeItem } = this.state;
     return (
       <Menu attached="top" compact={true} icon="labeled">
-        <Menu.Item header={true}>
-          <h1>BillPay</h1>
-        </Menu.Item>
+        <Link to="/">
+          <Menu.Item header={true}>
+            <h1>BillPay</h1>
+          </Menu.Item>
+        </Link>
         <Menu.Menu position="right">
           <Link to="/customer">
             <Menu.Item name="gamepad" active={activeItem === "gamepad"} onClick={this.handleItemClick}>
