@@ -1,7 +1,7 @@
 import * as React from "react";
 
-import { Layout } from "../merchant/MerchantLayout";
 import { Web3Component } from "../Web3Component";
+import { Layout } from "./CustomerLayout";
 
 export class Withdraw extends Web3Component {
   public constructor(props: any) {
