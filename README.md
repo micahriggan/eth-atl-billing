@@ -9,6 +9,8 @@ cd packages/eth-atl-billing-contracts
 npm run serve
 ```
 
+in the console find your seed and import it to meta mask
+
 terminal 2
 
 ```
