@@ -34,7 +34,7 @@ export class CustomerDashboard extends Web3Component<any, IState> {
     return (
       <Layout>
         <PendingBillsContainer />
-        <h3>Wallet {this.state.walletAddress}</h3>
+        <h3 className="ethAddr">Wallet {this.state.walletAddress}</h3>
         <h4>Amount: {this.state.balance} </h4>
         <h4>Value: </h4>
       </Layout>
