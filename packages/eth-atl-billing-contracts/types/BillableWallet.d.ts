@@ -13,37 +13,57 @@ export class BillableWallet {
   methods: {
     bills(
       arg0: number | string
-    ): TransactionObject<{ 0: string; 1: string; 2: string; 3: boolean }>;
+    ): TransactionObject<{
+      0: string;
+      1: string;
+      2: string;
+      3: boolean;
+      4: string;
+    }>;
 
-    authorizations(arg0: string): TransactionObject<{ 0: string; 1: string }>;
+    billerTokenProfiles(
+      arg0: string,
+      arg1: string
+    ): TransactionObject<{ 0: string; 1: string }>;
 
-    billerProfiles(
-      arg0: string
-    ): TransactionObject<{ 0: string; 1: string; 2: string }>;
+    billerTokenAuthorizations(
+      arg0: string,
+      arg1: string
+    ): TransactionObject<{ 0: string; 1: string }>;
 
     authorizedFor(
       amount: number | string,
-      biller: string
+      biller: string,
+      token: string
     ): TransactionObject<boolean>;
 
     isPaid(pendingBillIndex: number | string): TransactionObject<boolean>;
 
-    bill(amount: number | string): TransactionObject<boolean>;
+    getBalance(token: string): TransactionObject<string>;
+
+    bill(amount: number | string, token: string): TransactionObject<boolean>;
 
     approve(pendingBillIndex: number | string): TransactionObject<void>;
 
     authorize(
       biller: string,
       amount: number | string,
-      waitTime: number | string
+      waitTime: number | string,
+      token: string
     ): TransactionObject<void>;
 
-    send(amount: number | string, to: string): TransactionObject<void>;
+    revoke(biller: string, token: string): TransactionObject<void>;
+
+    transfer(
+      to: string,
+      amount: number | string,
+      token: string
+    ): TransactionObject<void>;
 
     deposit(): TransactionObject<void>;
 
     owner(): TransactionObject<string>;
-    balance(): TransactionObject<string>;
+    wFactory(): TransactionObject<string>;
   };
   deploy(options: {
     data: string;

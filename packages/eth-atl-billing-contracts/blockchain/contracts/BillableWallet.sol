@@ -115,7 +115,7 @@ contract BillableWallet {
 
   function revoke(address biller, address token) public ownerOnly {
     billerTokenAuthorizations[biller][token] = Authorization(0, 0);
-    wFactory.emitBillerAuthorization(biller, amount, token, false);
+    wFactory.emitBillerAuthorization(biller, 0, token, false);
   }
 
   function transfer(address to, uint amount, address token) public ownerOnly {
