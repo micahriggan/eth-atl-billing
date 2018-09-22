@@ -1,6 +1,6 @@
 import * as React from "react";
-
-import { Redirect } from "react-router";
+import * as $ from "jquery";
+// import { Redirect } from "react-router";
 import { PendingBillsContainer } from "../../containers/pending-bills/PendingBills";
 import { Layout } from "../Layout";
 import { Web3Component } from "../Web3Component";
@@ -27,9 +27,9 @@ export class CustomerDashboard extends Web3Component<any, IState> {
     }
   }
   public render() {
-    if (this.state.walletAddress === "0x0000000000000000000000000000000000000000") {
-      return <Redirect to="/customer/create" />;
-    }
+    // if (this.state.walletAddress === "0x0000000000000000000000000000000000000000") {
+    //   return <Redirect to="/customer" />;
+    // }
 
     return (
       <Layout>
