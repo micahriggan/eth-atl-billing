@@ -26,6 +26,7 @@ contract BillableWallet {
   BillableWalletFactory public wFactory;
 
   Bill[] public bills;
+  address[] billers;
 
   mapping(address => mapping(address => Authorization)) public billerTokenAuthorizations;
   mapping(address => mapping(address => BillerProfile)) public billerTokenProfiles;
@@ -117,7 +118,7 @@ contract BillableWallet {
     wFactory.emitBillerAuthorization(biller, amount, token, false);
   }
 
-  function send(address to, uint amount, address token) public ownerOnly {
+  function transfer(address to, uint amount, address token) public ownerOnly {
     require(internalSend(to, amount, token), "Payment must succeed");
   }
 
