@@ -30,7 +30,10 @@ export class BillCreationContainer extends Web3Component<IProps, IState> {
   }
   public render() {
     return (
-     <div/>
+      <div>
+        <input onChange={this.handleBillAmountChange} value={this.state.billAmount} placeholder="Bill Amount" />
+        <button onClick={this.createBill}>Create Bill</button>
+      </div>
     );
   }
 }

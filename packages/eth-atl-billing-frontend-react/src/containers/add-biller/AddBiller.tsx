@@ -46,7 +46,7 @@ export class AddBillerContainer extends Web3Component<IProps, IState> {
   }
   public render() {
     return (
-      <Table>
+      <Table color={"blue"}>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>Biller Address</Table.HeaderCell>
