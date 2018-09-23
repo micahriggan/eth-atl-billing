@@ -13,10 +13,6 @@ export class MerchantDashboardContainer extends Web3Component<any, IState> {
   public state: IState = {
     authorizations: {},
     past: {}
-    // past: {
-    //   kughiuyui: ["August 1st, 2018 at 12pm", "Micah", "$9.95"],
-    //   uihiuhiu: ["July 1st, 2018 at 12pm", "Micah", "$9.95"]
-    // }
   };
   // TODO: fix any
   public constructor(props: any) {
@@ -26,17 +22,48 @@ export class MerchantDashboardContainer extends Web3Component<any, IState> {
 
   public async componentDidMount() {
     this.getAuthorizations();
+    this.getPastBills();
   }
 
+  public async getPastBills() {
+    const accounts = await this.getAccounts();
+    const filter = { biller: accounts[0] };
+    this.getWssWalletFactory().getPastEvents("Bill", { fromBlock: 0, filter }, async (err, events) => {
+      console.log(events);
+      for (const event of events) {
+        const prevPast = this.state.past;
+        const wallet = event.returnValues.wallet;
+
+        /*
+       *kughiuyui: ["August 1st, 2018 at 12pm", "Micah", "$9.95"],
+       */
+
+        const billableWallet = this.getBillableWallet(wallet);
+        const bill = await billableWallet.methods.bills(event.returnValues.billIndex).call();
+        const amount = bill[0];
+        const createdAt = Number(bill[2]) * 1000;
+        const paid = bill[3] ? "Paid" : "Unpaid";
+        console.log(bill);
+        const past = Object.assign({}, prevPast, {
+          [event.transactionHash]: [new Date(createdAt).toString(), wallet, amount, paid]
+        });
+        this.setState({ past });
+      }
+    });
+  }
   public async getAuthorizations() {
     const accounts = await this.getAccounts();
     const filter = { biller: accounts[0], authorized: true };
-    this.getWssWalletFactory().events.BillerState({ fromBlock: 0, filter }, (err, data) => {
-      const prevAuthorizations = this.state.authorizations;
-      const authorizations = Object.assign({}, prevAuthorizations, {
-        [data.returnValues.wallet]: ["", data.returnValues.wallet, data.returnValues.amount, "monthly"]
-      });
-      this.setState({ authorizations });
+    this.getWssWalletFactory().getPastEvents("BillerState", { fromBlock: 0, filter }, (err, events) => {
+      console.log(events);
+      for (const event of events) {
+        const prevAuthorizations = this.state.authorizations;
+        const wallet = event.returnValues.wallet;
+        const authorizations = Object.assign({}, prevAuthorizations, {
+          [event.transactionHash]: ["", wallet, event.returnValues.amount, "monthly"]
+        });
+        this.setState({ authorizations });
+      }
     });
   }
 

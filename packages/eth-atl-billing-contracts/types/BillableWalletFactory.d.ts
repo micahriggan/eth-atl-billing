@@ -17,11 +17,17 @@ export class BillableWalletFactory {
 
     createWallet(): TransactionObject<void>;
 
-    emitBillerAuthorization(
+    emitBillerStateChange(
       biller: string,
       amount: number | string,
       token: string,
       authorized: boolean
+    ): TransactionObject<void>;
+
+    emitBill(
+      biller: string,
+      wallet: string,
+      billIndex: number | string
     ): TransactionObject<void>;
   };
   deploy(options: {
@@ -30,6 +36,15 @@ export class BillableWalletFactory {
   }): TransactionObject<Contract>;
   events: {
     BillerState(
+      options?: {
+        filter?: object;
+        fromBlock?: BlockType;
+        topics?: string[];
+      },
+      cb?: Callback<EventLog>
+    ): EventEmitter;
+
+    Bill(
       options?: {
         filter?: object;
         fromBlock?: BlockType;

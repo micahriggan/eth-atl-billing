@@ -95,7 +95,7 @@ export class MerchantDashboard extends Web3Component<IProps> {
       return <h2>You don't have any past bills</h2>;
     }
     const tableProps = {
-      headerLabels: ["Date", "Customer", "Amount"],
+      headerLabels: ["Date", "Customer", "Amount", "Paid"],
       actionRow: false,
       tableData: this.props.pastBillData
     };
