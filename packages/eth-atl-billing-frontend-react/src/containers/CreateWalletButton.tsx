@@ -1,7 +1,10 @@
 import * as React from "react";
 import { Web3Component } from "../components/Web3Component";
 
-export class MainPage extends Web3Component {
+interface IProps {
+  onClick: (tx: Promise<any>) => {};
+}
+export class CreateWalletButton extends Web3Component<IProps> {
   constructor(props: any) {
     super(props);
     this.createWallet = this.createWallet.bind(this);
@@ -10,17 +13,17 @@ export class MainPage extends Web3Component {
   public async createWallet() {
     const accounts = await this.getAccounts();
     const account = accounts[0];
-    const tx = await this.getWalletFactory()
+    const tx = this.getWalletFactory()
       .methods.createWallet()
       .send({ from: account });
-    window.console.log(tx);
+    this.props.onClick(tx);
   }
 
   public render() {
     return (
-      <div>
-        <button onClick={this.createWallet}>Create Wallet </button>
-      </div>
+      <button className="ui button" role="button" onClick={this.createWallet}>
+        Create Wallet
+      </button>
     );
   }
 }
