@@ -32,10 +32,11 @@ contract BillableWalletFactory {
     emit BillerState(biller, msg.sender, amount, token, authorized);
   }
 
-  function emitBill(address biller, address wallet, uint billIndex) public onlyWallet {
+  function emitBill(address biller, uint billIndex) public onlyWallet {
     emit Bill(biller, msg.sender, billIndex);
   }
 
 
 }
+
 

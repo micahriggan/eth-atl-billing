@@ -10,12 +10,12 @@ interface IProps {
   onChange: (data: string) => void;
 }
 export enum TIMES {
-  ANNUAL = "31557600000",
-  MONTH = "2629800000",
-  BIWEEK = "1209600000",
-  WEEK = "604800000",
-  DAY = "86400000",
-  HOUR = "3600000"
+  ANNUAL = "31557600",
+  MONTH = "2629800",
+  BIWEEK = "1209600",
+  WEEK = "604800",
+  DAY = "86400",
+  HOUR = "3600"
 }
 
 export class Recurrence extends React.Component<IProps, IState> {
