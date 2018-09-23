@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Button, Table } from 'semantic-ui-react'
 import { Web3Component } from "../../components/Web3Component";
 import { TOKENS } from "../../constants/Eth";
 
@@ -45,21 +46,35 @@ export class AddBillerContainer extends Web3Component<IProps, IState> {
   }
   public render() {
     return (
-      <div>
-        <input onChange={this.handleBillerAddressChange} value={this.state.biller} placeholder="Biller Address" />
-        <input
-          onChange={this.handleAuthorizedAmountChange}
-          value={this.state.authorizedAmount}
-          placeholder="Bill Amount"
-        />
-        <input
-          onChange={this.handleAuthorizedFrequencyChange}
-          value={this.state.authorizedFrequency}
-          placeholder="Bill Time Offset (ms)"
-        />
+      <Table>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell>Biller Address</Table.HeaderCell>
+            <Table.HeaderCell>Bill Amount</Table.HeaderCell>
+            <Table.HeaderCell>Timed Offset</Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
 
-        <button onClick={this.authorizeBiller}>Authorize Biller</button>
-      </div>
+        <Table.Body>
+          <Table.Row>
+            <Table.Cell><input onChange={this.handleBillerAddressChange} value={this.state.biller} /></Table.Cell>
+            <Table.Cell><input
+              onChange={this.handleAuthorizedAmountChange}
+              value={this.state.authorizedAmount} /></Table.Cell>
+            <Table.Cell><input
+              onChange={this.handleAuthorizedFrequencyChange}
+              value={this.state.authorizedFrequency} /></Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell />
+            <Table.Cell>
+              <Button primary={true} onClick={this.authorizeBiller}>
+                Authorize
+              </Button>
+            </Table.Cell>
+          </Table.Row>
+        </Table.Body>
+      </Table>
     );
-  }
+  };
 }
