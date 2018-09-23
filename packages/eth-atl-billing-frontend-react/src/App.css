@@ -67,3 +67,37 @@ i.large-user-type {
 .no-border-radius {
   border-radius: 0px !important;
 }
+
+.ui .button {
+  background-color: #4444ff;
+  color: white;
+  border-radius: 16px;
+}
+
+.ui .button:hover {
+  background-color: white;
+  color: #4444ff;
+  border: 2px solid #4444ff;
+}
+
+#withdraw {
+  background-color: #dd4b39;
+  color: white;
+}
+#withdraw:hover {
+  background-color: white;
+  color: #dd4b39;
+  border: 2px solid #dd4b39;
+  transition: .2s;
+}
+#balanceHeader {
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  font-weight: 200;
+  font-size: 20px;
+  padding-left: 25px;
+}
+
+#balanceNum {
+  font-weight: 200;
+}

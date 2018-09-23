@@ -105,8 +105,11 @@ export class CustomerDashboard extends Web3Component<any, IState> {
           <Segment>
             <Grid centered={true} columns={4}>
               <Grid.Column>
-                <Header size="huge" className="container-header-text">Balance: {this.state.balance}</Header>
+                <Header id="balanceHeader" size="huge" className="container-header-text">Current Balance </Header>
               </Grid.Column>
+                <Grid.Row>
+                    <Header id="balanceNum">{this.state.balance}</Header>
+                </Grid.Row>
                 <Grid.Row centered={true} columns={8}>
                 <Grid.Column>
                   <button className="ui button" role="button" onClick={setSection("DEPOSIT")}>
@@ -114,7 +117,7 @@ export class CustomerDashboard extends Web3Component<any, IState> {
                   </button>
                 </Grid.Column>
                 <Grid.Column>
-                  <button className="ui button" role="button" onClick={setSection("WITHDRAW")}>
+                  <button id="withdraw" className="ui button" role="button" onClick={setSection("WITHDRAW")}>
                     WITHDRAW
                   </button>
                 </Grid.Column>
