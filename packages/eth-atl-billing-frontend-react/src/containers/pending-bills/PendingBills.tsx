@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Header } from 'semantic-ui-react'
+import { Header } from "semantic-ui-react";
 import { IBill, PendingBills } from "../../components/PendingBills/PendingBills";
 import { Web3Component } from "../../components/Web3Component";
 import { AddBillerContainer } from "../add-biller/AddBiller";
@@ -38,9 +38,9 @@ export class PendingBillContainer extends Web3Component<any, IState> {
     }
   }
 
-  public approveBillHander(data: any) {
-    const index = 0;
-    this.approveBill(index);
+  public approveBillHander(data: any, key: any) {
+    console.log(data, key);
+    this.approveBill(key);
   }
 
   public async approveBill(billIndex: number) {
@@ -50,11 +50,11 @@ export class PendingBillContainer extends Web3Component<any, IState> {
   }
   public render() {
     return (
-      <Header as={'h3'} block={true}>
+      <Header as={"h3"} block={true}>
         <PendingBills bills={this.state.bills} approveBill={this.approveBillHander} />
         <AddBillerContainer walletAddress={this.state.walletAddress} />
         <BillCreationContainer walletAddress={this.state.walletAddress} />
       </Header>
-    )
-  };
+    );
+  }
 }

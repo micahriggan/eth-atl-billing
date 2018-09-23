@@ -12,7 +12,7 @@ export interface IProps {
   actionHeaderLabel?: string;
   actionRow?: boolean;
   actionButtonLabel?: string;
-  actionButtonHandler?: (rowData: Array<number | string>) => void;
+  actionButtonHandler?: (rowData: Array<number | string>, obj: any) => void;
   actionButtonIcon?: string;
   actionButtonColor?: string;
   tableData: ITableData;
@@ -29,10 +29,12 @@ export class BaseTable extends React.Component<IProps> {
 
     for (const dataKey of Object.keys(this.props.tableData)) {
       const data = this.props.tableData[dataKey];
+      const wrappedHandler = (args: Array<number | string>) =>
+        this.props.actionButtonHandler && this.props.actionButtonHandler(args, dataKey);
       const rowProps = {
         rowData: data,
         actionButtonLabel: this.props.actionButtonLabel,
-        actionButtonHandler: this.props.actionButtonHandler,
+        actionButtonHandler: wrappedHandler,
         actionRow: this.props.actionRow || false,
         actionButtonColor: this.props.actionButtonColor,
         actionButtonIcon: this.props.actionButtonIcon
