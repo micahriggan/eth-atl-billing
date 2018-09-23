@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Web3Component } from "../../components/Web3Component";
+import { TOKENS } from "../../constants/Eth";
 
 interface IProps {
   walletAddress: string;
@@ -39,7 +40,7 @@ export class AddBillerContainer extends Web3Component<IProps, IState> {
     const wallet = await this.getBillableWallet(this.props.walletAddress);
     const accounts = await this.getAccounts();
     await wallet.methods
-      .authorize(this.state.biller, this.state.authorizedAmount, this.state.authorizedFrequency)
+      .authorize(this.state.biller, this.state.authorizedAmount, this.state.authorizedFrequency, TOKENS.ETH)
       .send({ from: accounts[0] });
   }
   public render() {

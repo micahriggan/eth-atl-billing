@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Web3Component } from "../../components/Web3Component";
+import { TOKENS } from "../../constants/Eth";
 
 interface IProps {
   walletAddress: string;
@@ -25,7 +26,7 @@ export class BillCreationContainer extends Web3Component<IProps, IState> {
   public async createBill() {
     const wallet = await this.getBillableWallet(this.props.walletAddress);
     const accounts = await this.getAccounts();
-    wallet.methods.bill(this.state.billAmount).send({ from: accounts[0] });
+    wallet.methods.bill(this.state.billAmount, TOKENS.ETH).send({ from: accounts[0] });
   }
   public render() {
     return (

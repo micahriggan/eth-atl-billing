@@ -7,70 +7,35 @@ import { Callback, EventLog } from "web3/types";
 import { EventEmitter } from "events";
 import { Provider } from "web3/providers";
 
-export class BillableWallet {
+export class ERC20Interface {
   constructor(jsonInterface: any[], address?: string, options?: CustomOptions);
   options: contractOptions;
   methods: {
-    bills(
-      arg0: number | string
-    ): TransactionObject<{
-      0: string;
-      1: string;
-      2: string;
-      3: boolean;
-      4: string;
-    }>;
+    balanceOf(tokenOwner: string): TransactionObject<string>;
 
-    billerTokenProfiles(
-      arg0: string,
-      arg1: string
-    ): TransactionObject<{ 0: string; 1: string }>;
+    allowance(tokenOwner: string, spender: string): TransactionObject<string>;
 
-    billerTokenAuthorizations(
-      arg0: string,
-      arg1: string
-    ): TransactionObject<{ 0: string; 1: string }>;
+    transfer(to: string, tokens: number | string): TransactionObject<boolean>;
 
-    authorizedFor(
-      amount: number | string,
-      biller: string,
-      token: string
+    approve(
+      spender: string,
+      tokens: number | string
     ): TransactionObject<boolean>;
 
-    isPaid(pendingBillIndex: number | string): TransactionObject<boolean>;
-
-    getBalance(token: string): TransactionObject<string>;
-
-    bill(amount: number | string, token: string): TransactionObject<boolean>;
-
-    approve(pendingBillIndex: number | string): TransactionObject<void>;
-
-    authorize(
-      biller: string,
-      amount: number | string,
-      waitTime: number | string,
-      token: string
-    ): TransactionObject<void>;
-
-    revoke(biller: string, token: string): TransactionObject<void>;
-
-    transfer(
+    transferFrom(
+      from: string,
       to: string,
-      amount: number | string,
-      token: string
-    ): TransactionObject<void>;
+      tokens: number | string
+    ): TransactionObject<boolean>;
 
-    deposit(): TransactionObject<void>;
-
-    owner(): TransactionObject<string>;
-    wFactory(): TransactionObject<string>;
+    totalSupply(): TransactionObject<string>;
   };
   deploy(options: {
     data: string;
     arguments: any[];
   }): TransactionObject<Contract>;
   events: {
-    BillPaid(
+    Transfer(
       options?: {
         filter?: object;
         fromBlock?: BlockType;
@@ -79,7 +44,7 @@ export class BillableWallet {
       cb?: Callback<EventLog>
     ): EventEmitter;
 
-    Deposit(
+    Approval(
       options?: {
         filter?: object;
         fromBlock?: BlockType;
