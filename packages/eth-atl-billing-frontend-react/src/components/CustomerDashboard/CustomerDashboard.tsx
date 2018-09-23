@@ -4,7 +4,7 @@ import * as React from "react";
  *import { Redirect } from "react-router";
  */
 import { Redirect } from "react-router";
-import { Segment } from "semantic-ui-react";
+import { Grid, Header, Menu, Segment } from "semantic-ui-react";
 import { TOKENS } from "../../constants/Eth";
 import { CreateWalletButton } from "../../containers/CreateWalletButton";
 import { PendingBillsContainer } from "../../containers/pending-bills/PendingBills";
@@ -54,7 +54,7 @@ export class CustomerDashboard extends Web3Component<any, IState> {
       case "PAID":
         return this.getBillsSection();
         break;
-      case "PENDING":
+      case "REQUESTS":
         return this.getBillsSection();
         break;
       case "NO_WALLET":
@@ -105,23 +105,31 @@ export class CustomerDashboard extends Web3Component<any, IState> {
       <Layout>
         <Segment loading={this.state.loading}>
           <Segment>
-            <h3>Balance: {this.state.balance}</h3>
-            <button className="ui button" role="button" onClick={setSection("DEPOSIT")}>
-              DEPOSIT
-            </button>
-            <button className="ui button" role="button" onClick={setSection("WITHDRAW")}>
-              WITHDRAW
-            </button>
+            <Grid centered={true} columns={4}>
+              <Grid.Column>
+                <Header size="huge">Balance: {this.state.balance}</Header>
+              </Grid.Column>
+              <Grid.Row centered={true} columns={8}>
+                <Grid.Column>
+                  <button className="ui button" role="button" onClick={setSection("DEPOSIT")}>
+                    DEPOSIT
+                  </button>
+                </Grid.Column>
+                <Grid.Column>
+                  <button className="ui button" role="button" onClick={setSection("WITHDRAW")}>
+                    WITHDRAW
+                  </button>
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
           </Segment>
-          <button className="ui button" role="button" onClick={setSection("BILLS")}>
-            BILLS
-          </button>
-          <button className="ui button" role="button" onClick={setSection("PAID")}>
-            PAID
-          </button>
-          <button className="ui button" role="button" onClick={setSection("BILLS")}>
-            PENDING
-          </button>
+
+          <Menu pointing={true} secondary={true}>
+            <Menu.Item name="BILLS" active={this.state.section === "BILLS"} onClick={setSection("BILLS")} />
+            <Menu.Item name="PAID" active={this.state.section === "PAID"} onClick={setSection("PAID")} />
+            <Menu.Item name="REQUESTS" active={this.state.section === "REQUESTS"} onClick={setSection("REQUESTS")} />
+          </Menu>
+
           <Segment>{listSection}</Segment>
         </Segment>
       </Layout>
