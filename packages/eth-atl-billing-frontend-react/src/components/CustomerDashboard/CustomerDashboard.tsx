@@ -116,7 +116,7 @@ export class CustomerDashboard extends Web3Component<any, IState> {
           <Segment>
             <Grid centered={true} columns={4}>
               <Grid.Row>
-                <Header size="huge">{this.state.walletAddress}</Header>
+                <Header size="huge">Deposit Address: {this.state.walletAddress}</Header>
               </Grid.Row>
 
               <Grid.Column>

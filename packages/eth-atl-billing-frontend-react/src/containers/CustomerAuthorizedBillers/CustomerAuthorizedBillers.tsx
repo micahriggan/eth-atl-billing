@@ -1,57 +1,42 @@
 import * as React from "react";
-import { IBill } from "../../components/PendingBills/PendingBills";
 import { Web3Component } from "../../components/Web3Component";
-import { CustomerPaidBills } from "../../components/CustomerPaidBills/CustomerPaidBills";
+import {
+  IAuthorization,
+  CustomerAuthorizedBillers
+} from "../../components/CustomerAuthorizedBillers/CustomerAuthorizedBillers";
 
 interface IState {
-  bills: IBill[];
-  walletAddress: string;
+  authorizations: IAuthorization[];
 }
 export class CustomerAuthorizedBillersContainer extends Web3Component<any, IState> {
   public state: IState = {
-    bills: [],
-    walletAddress: ""
+    authorizations: []
   };
   constructor(props: any) {
     super(props);
   }
   public async componentDidMount() {
-    const walletAddress = await this.getMyBillableWalletAddress();
-    const wallet = await this.getMyWallet();
-    this.setState({ walletAddress });
-    const bills = [];
-    let index = 0;
-    for await (const bill of this.web3Iterable(wallet.methods.bills, null)) {
-      const pendingBill: IBill = {
-        index,
-        amount: bill[0],
-        biller: bill[1],
-        createdAt: bill[2],
-        paid: bill[3]
-      };
-      bills.push(pendingBill);
-      index++;
-      this.setState({ bills });
-    }
+    this.getAuthorizedBillers();
   }
 
-  public approveBillHander(data: any) {
-    const index = 0;
-    this.approveBill(index);
-  }
-
-  public async approveBill(billIndex: number) {
-    const wallet = await this.getMyWallet();
+  public async getAuthorizedBillers() {
     const accounts = await this.getAccounts();
-    // needs bill index
-    wallet.methods.approve(billIndex).send({ from: accounts[0] });
+    const filter = { wallet: accounts[0], authorized: true };
+    this.getWssWalletFactory().getPastEvents("BillerState", { fromBlock: 0, filter }, (err, events) => {
+      console.log(events);
+      const newAuthorizations = JSON.parse(JSON.stringify(this.state.authorizations));
+      for (const event of events) {
+        newAuthorizations.push({
+          biller: event.returnValues.biller,
+          amount: event.returnValues.amount
+        });
+      }
+      this.setState({ authorizations: newAuthorizations });
+      console.log("my state", this.state);
+    });
   }
+
   public render() {
-    return (
-        // <CustomerAuthorizedBillers bills={}/>
-      <div>
-        <CustomerPaidBills bills={this.state.bills} />
-      </div>
-    );
+    return <CustomerAuthorizedBillers authorizations={this.state.authorizations} />;
   }
 }
