@@ -5,7 +5,7 @@ import { Route, Router, Switch } from "react-router-dom";
 import "./App.css";
 import { CustomerDashboard } from "./components/CustomerDashboard/CustomerDashboard";
 import { MainPage } from "./components/MainPage/MainPage";
-import { MerchantDashboard } from "./components/MerchantDashboard/MerchantDashboard";
+import { MerchantDashboardContainer } from "./containers/MerchantDashboard/MerchantDashboard";
 import { DepositContainer } from "./containers/deposit/Deposit";
 import { WithdrawContainer } from "./containers/withdraw/Withdraw";
 
@@ -17,7 +17,7 @@ class App extends React.Component {
       <Router history={customHistory}>
         <Switch>
           <Route exact={true} path="/" component={MainPage} />
-          <Route exact={true} path="/merchant" component={MerchantDashboard} />
+          <Route exact={true} path="/merchant" component={MerchantDashboardContainer} />
           <Route exact={true} path="/customer" component={CustomerDashboard} />
           <Route exact={true} path="/withdraw" component={WithdrawContainer} />
           <Route exact={true} path="/deposit" component={DepositContainer} />
