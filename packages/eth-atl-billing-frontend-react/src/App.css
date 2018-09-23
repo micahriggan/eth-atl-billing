@@ -152,6 +152,6 @@ div.ui.dashboard-header-label {
     display: flex;
     justify-content: center;
     align-items: center !important;
-    width:100vh;
+    width:75vh;
     font-style: italic;
 }
