@@ -26,7 +26,6 @@ export class BillableWalletFactory {
 
     emitBill(
       biller: string,
-      wallet: string,
       billIndex: number | string
     ): TransactionObject<void>;
   };

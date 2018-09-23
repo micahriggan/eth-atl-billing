@@ -9,7 +9,7 @@ contract BillableWalletFactory {
   mapping(address => bool) isWallet;
   address owner;
 
-  event BillerState(address indexed biller, address wallet, uint amount, address token, bool authorized);
+  event BillerState(address indexed biller, address indexed wallet, uint amount, address token, bool authorized);
   event Bill(address indexed biller, address wallet,  uint billIndex);
 
   constructor() public {
