@@ -11,12 +11,12 @@ interface IState {
 }
 export class MerchantDashboardContainer extends Web3Component<any, IState> {
   public state: IState = {
-    authorizations: {
-    },
-    past: {
-      kughiuyui: ["August 1st, 2018 at 12pm", "Micah", "$9.95"],
-      uihiuhiu: ["July 1st, 2018 at 12pm", "Micah", "$9.95"]
-    }
+    authorizations: {},
+    past: {}
+    // past: {
+    //   kughiuyui: ["August 1st, 2018 at 12pm", "Micah", "$9.95"],
+    //   uihiuhiu: ["July 1st, 2018 at 12pm", "Micah", "$9.95"]
+    // }
   };
   // TODO: fix any
   public constructor(props: any) {

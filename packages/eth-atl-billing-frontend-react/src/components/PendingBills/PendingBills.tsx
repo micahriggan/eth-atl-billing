@@ -1,6 +1,8 @@
 import * as React from "react";
 import { Web3Component } from "../Web3Component";
 
+import { BaseTable } from "../BaseTable/BaseTable";
+
 export interface IBill {
   amount: string;
   biller: string;
@@ -34,7 +36,31 @@ export class PendingBills extends Web3Component<IProps> {
   }
 
   public render() {
-    const billComponents = this.props.bills.map(PendingBills.getBillComponent);
-    return <div>{billComponents}</div>;
+    return <div>{this.baseTableComponent()}</div>;
+  }
+
+  private baseTableComponent() {
+    if (!this.props.bills) {
+      return <div />;
+    }
+
+    const billTableData = {};
+
+    for (let i = 0; i < this.props.bills.length; i++) {
+      const bill = this.props.bills[i];
+      billTableData[`bill${i}`] = [bill.createdAt, bill.paid ? "Paid" : "Unpaid", bill.biller, bill.amount];
+    }
+
+    const tableProps = {
+      headerLabels: ["Date", "Status", "Biller", "Amount"],
+      actionRow: true,
+      actionHeaderLabel: "Actions",
+      actionButtonLabel: "Pay",
+      actionButtonIcon: "money",
+      actionButtonColor: "green",
+      tableData: billTableData
+    };
+
+    return <BaseTable {...tableProps} />;
   }
 }

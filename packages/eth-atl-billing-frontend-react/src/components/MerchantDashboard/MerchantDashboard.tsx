@@ -25,7 +25,6 @@ export class MerchantDashboard extends Web3Component<IProps> {
     this.onSubmitBill = this.onSubmitBill.bind(this);
   }
 
-
   public showModal = (rowData: Array<string | number>) => this.setState({ openModal: true, activeModelData: rowData });
   public hideModel = () => this.setState({ openModal: false, activeModelData: null });
 
@@ -72,6 +71,9 @@ export class MerchantDashboard extends Web3Component<IProps> {
     if (this.state.activeItem !== "authorizations") {
       return;
     }
+    if (Object.keys(this.props.authorizedBillData).length === 0) {
+      return <h2>You aren't authorized to bill any customers</h2>;
+    }
     const tableProps = {
       headerLabels: ["Customer", "Address", "Amount", "Frequency"],
       actionHeaderLabel: "Actions",
@@ -88,6 +90,9 @@ export class MerchantDashboard extends Web3Component<IProps> {
   private pastTableComponent() {
     if (this.state.activeItem !== "past") {
       return;
+    }
+    if (Object.keys(this.props.pastBillData).length === 0) {
+      return <h2>You don't have any past bills</h2>;
     }
     const tableProps = {
       headerLabels: ["Date", "Customer", "Amount"],
