@@ -47,12 +47,7 @@ export class BillCustomerModal extends React.Component<IProp, IState> {
               <Label basic={true}>$</Label>
               <input />
             </Input>
-
-            {/* <Modal.Description>
-              <Header>Default Profile Image</Header>
-              <p>We've found the following gravatar image associated with your e-mail address.</p>
-              <p>Is it okay to use this photo?</p>
-            </Modal.Description> */}
+            
           </Modal.Content>
           <Modal.Actions>
             <Button color="blue" onClick={this.onSubmit}>
