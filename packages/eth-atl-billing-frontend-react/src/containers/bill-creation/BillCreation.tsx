@@ -30,7 +30,7 @@ export class BillCreationContainer extends Web3Component<IProps, IState> {
   }
   public render() {
     return (
-     <div/>
+      <div/>
     );
   }
 }

@@ -21,7 +21,8 @@ export class CustomerAuthorizedBillersContainer extends Web3Component<any, IStat
 
   public async getAuthorizedBillers() {
     const accounts = await this.getAccounts();
-    const filter = { wallet: accounts[0], authorized: true };
+    // TODO: intentional bug to get something to show up
+    const filter = { address: accounts[0], authorized: true };
     this.getWssWalletFactory().getPastEvents("BillerState", { fromBlock: 0, filter }, (err, events) => {
       console.log(events);
       const newAuthorizations = JSON.parse(JSON.stringify(this.state.authorizations));

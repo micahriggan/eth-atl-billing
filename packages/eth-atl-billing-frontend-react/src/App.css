@@ -2,6 +2,42 @@
   text-align: center;
 }
 
+body {
+    background-image: url("../src/images/bgimg.jpg");
+}
+
+.app-title {
+    background-color: #888888;
+    font-weight: 700;
+    color: #CCCCCC;
+    font-style: italic;
+}
+
+div.menu.tabular.top.attached > a.item.active {
+    background-color:#FAFAFA;
+    color: #2a75ed;
+    font-weight:700;
+}
+
+div.menu.tabular.top.attached > a.item:not(.active) {
+    background-color:#CCCCCC;
+    font-weight:300;
+}
+
+.container-header-text{
+    font-weight: 700;
+    color:red;
+}
+
+.no-margin-top {
+    margin-top: 0px !important;
+}
+
+i.large-user-type {
+    font-size: 24px;
+    height: 32px;
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
@@ -35,4 +71,64 @@
 
 .no-border-radius {
   border-radius: 0px !important;
+}
+
+.ui .button {
+  background-color: #2185d0;
+  color: white;
+  border-radius: 16px;
+}
+
+#withdraw {
+  background-color: #DD4B39;
+  color: white;
+}
+
+#balanceHeader {
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  font-weight: 200;
+  font-size: 16px;
+  padding-left: 25px;
+    width:100%;
+    vertical-align: middle!important;
+}
+
+#balanceNum {
+    font-weight: 700;
+    font-size:20px;
+}
+
+.wallet-address-dashboard {
+    color: #888888!important;
+    font-weight:200 !important;
+    font-size: 1em!important;
+    font-style:italic !important;
+}
+
+div.ui.dashboard-header-label {
+    vertical-align: middle !important;
+    font-size: 1.1em!important;
+    text-transform: uppercase !important;
+    font-weight:200 !important;
+}
+
+.ui.centered.four.column.grid {
+    background: linear-gradient(to bottom, rgba(207,231,250,0.35) 50%,rgba(99,147,193,0.35) 100%);
+}
+
+.ui {
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+#merchantFlowDiv {
+    position: absolute !important;
+    top: 200px;
+    left:50px;
+}
+
+#customerFlowDiv {
+    position: absolute !important;
+    top: 200px;
+    right: 50px;
 }

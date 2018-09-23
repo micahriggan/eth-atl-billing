@@ -12,10 +12,11 @@ export class MenuBar extends Web3Component {
     return (
       <Menu attached="top" compact={true} icon="labeled">
         <Link to="/">
-          <Menu.Item header={true}>
+          <Menu.Item header={true} className="app-title">
             <h1>BillPay</h1>
           </Menu.Item>
         </Link>
+        <hr />
       </Menu>
     );
   }

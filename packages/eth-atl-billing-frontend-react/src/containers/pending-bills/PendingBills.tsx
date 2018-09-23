@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Header } from 'semantic-ui-react'
 import { IBill, PendingBills } from "../../components/PendingBills/PendingBills";
 import { Web3Component } from "../../components/Web3Component";
 import { AddBillerContainer } from "../add-biller/AddBiller";
@@ -49,11 +50,11 @@ export class PendingBillContainer extends Web3Component<any, IState> {
   }
   public render() {
     return (
-      <div>
+      <Header as={'h3'} block={true}>
         <PendingBills bills={this.state.bills} approveBill={this.approveBillHander} />
         <AddBillerContainer walletAddress={this.state.walletAddress} />
         <BillCreationContainer walletAddress={this.state.walletAddress} />
-      </div>
-    );
-  }
+      </Header>
+    )
+  };
 }
