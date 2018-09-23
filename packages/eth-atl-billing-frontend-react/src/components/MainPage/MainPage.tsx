@@ -22,7 +22,7 @@ export class MainPage extends Web3Component {
               <Card.Content extra={true}>
                   <Link to="/customer">
                   <div className="ui animated basic blue button">
-                      <div className="visible content">Manage Clients</div>
+                      <div className="visible content">Pay Bills</div>
                       <div className="hidden content">
                           <i className="right arrow icon" />
                       </div>
@@ -44,7 +44,7 @@ export class MainPage extends Web3Component {
               <Card.Content extra={true}>
                   <Link to="/merchant">
                   <div className="ui animated basic blue button">
-                      <div className="visible content">Pay Bills</div>
+                      <div className="visible content">Manage Clients</div>
                       <div className="hidden content">
                           <i className="right arrow icon" />
                       </div>
