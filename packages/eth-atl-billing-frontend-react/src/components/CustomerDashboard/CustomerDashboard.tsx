@@ -1,7 +1,10 @@
 import { Grid, Header, Menu, Segment } from "semantic-ui-react";
 import { TOKENS } from "../../constants/Eth";
 import { CreateWalletButton } from "../../containers/CreateWalletButton";
-import { PendingBillsContainer } from "../../containers/pending-bills/PendingBills";
+import { PendingBillContainer } from "../../containers/pending-bills/PendingBills";
+import { PaidBillContainer } from "../../containers/paid-bills/PaidBills";
+import { CustomerAuthorizedBillersContainer } from "../../containers/CustomerAuthorizedBillers/CustomerAuthorizedBillers";
+
 import { Layout } from "../Layout";
 import { Redirect } from "react-router";
 import * as React from "react";
@@ -47,13 +50,13 @@ export class CustomerDashboard extends Web3Component<any, IState> {
   public getListSection(section: string) {
     switch (section) {
       case "BILLS":
-        return this.getBillsSection();
+        return this.getPendingBillsSection();
         break;
       case "PAID":
-        return this.getBillsSection();
+        return this.getPaidBillsSection();
         break;
       case "REQUESTS":
-        return this.getBillsSection();
+        return this.getAuthorizedBillersSection();
         break;
       case "NO_WALLET":
         return this.getCreateWalletSection();
@@ -65,7 +68,7 @@ export class CustomerDashboard extends Web3Component<any, IState> {
         return this.getWithdrawRedirect();
         break;
       default:
-        return this.getBillsSection();
+        return this.getPendingBillsSection();
         break;
     }
   }
@@ -77,8 +80,16 @@ export class CustomerDashboard extends Web3Component<any, IState> {
     return <Redirect to="/withdraw" />;
   }
 
-  public getBillsSection() {
-    return <PendingBillsContainer />;
+  public getPendingBillsSection() {
+    return <PendingBillContainer />;
+  }
+
+  public getPaidBillsSection() {
+    return <PaidBillContainer />;
+  }
+
+  public getAuthorizedBillersSection() {
+    return <CustomerAuthorizedBillersContainer />;
   }
 
   public async handleWalletCreation(tx: Promise<any>) {
@@ -129,7 +140,12 @@ export class CustomerDashboard extends Web3Component<any, IState> {
           <Menu pointing={true} secondary={true}>
             <Menu.Item name="BILLS" active={this.state.section === "BILLS"} onClick={setSection("BILLS")} />
             <Menu.Item name="PAID" active={this.state.section === "PAID"} onClick={setSection("PAID")} />
-            <Menu.Item name="REQUESTS" active={this.state.section === "REQUESTS"} onClick={setSection("REQUESTS")} />
+            <Menu.Item
+              name="REQUESTS"
+              active={this.state.section === "REQUESTS"}
+              onClick={setSection("REQUESTS")}
+              content="AUTHORIZATIONS"
+            />
           </Menu>
 
           <Segment>{listSection}</Segment>

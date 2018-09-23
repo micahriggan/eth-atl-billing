@@ -1,21 +1,19 @@
 import * as React from "react";
-import { IBill, PendingBills } from "../../components/PendingBills/PendingBills";
+import { IBill } from "../../components/PendingBills/PendingBills";
 import { Web3Component } from "../../components/Web3Component";
-import { AddBillerContainer } from "../add-biller/AddBiller";
-import { BillCreationContainer } from "../bill-creation/BillCreation";
+import { CustomerPaidBills } from "../../components/CustomerPaidBills/CustomerPaidBills";
 
 interface IState {
   bills: IBill[];
   walletAddress: string;
 }
-export class PendingBillContainer extends Web3Component<any, IState> {
+export class CustomerAuthorizedBillersContainer extends Web3Component<any, IState> {
   public state: IState = {
     bills: [],
     walletAddress: ""
   };
   constructor(props: any) {
     super(props);
-    this.approveBillHander = this.approveBillHander.bind(this);
   }
   public async componentDidMount() {
     const walletAddress = await this.getMyBillableWalletAddress();
@@ -45,14 +43,14 @@ export class PendingBillContainer extends Web3Component<any, IState> {
   public async approveBill(billIndex: number) {
     const wallet = await this.getMyWallet();
     const accounts = await this.getAccounts();
+    // needs bill index
     wallet.methods.approve(billIndex).send({ from: accounts[0] });
   }
   public render() {
     return (
+        // <CustomerAuthorizedBillers bills={}/>
       <div>
-        <PendingBills bills={this.state.bills} approveBill={this.approveBillHander} />
-        <AddBillerContainer walletAddress={this.state.walletAddress} />
-        <BillCreationContainer walletAddress={this.state.walletAddress} />
+        <CustomerPaidBills bills={this.state.bills} />
       </div>
     );
   }

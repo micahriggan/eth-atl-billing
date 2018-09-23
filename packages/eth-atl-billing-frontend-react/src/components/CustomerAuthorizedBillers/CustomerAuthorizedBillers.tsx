@@ -23,20 +23,8 @@ export interface BillerProfile {
 }
 interface IProps {
   bills: IBill[];
-  approveBill: (data: any) => void;
 }
-export class PendingBills extends Web3Component<IProps> {
-  public static getBillComponent(bill: IBill) {
-    // resolve addresses to biller names
-    const paidTag = bill.paid ? "[paid]" : "[unpaid]";
-    return (
-      <div>
-        {" "}
-        {paidTag} Biller {bill.biller} has submitted a bill for {bill.amount} at {bill.createdAt}{" "}
-      </div>
-    );
-  }
-
+export class CustomerAuthorizedBillers extends Web3Component<IProps> {
   public render() {
     return <div>{this.paidBillComponent()}</div>;
   }
@@ -46,29 +34,24 @@ export class PendingBills extends Web3Component<IProps> {
       return <div />;
     }
 
-    const unpaidBills = this.props.bills.filter(bill => {
-      return bill.paid === false;
+    const paidBills = this.props.bills.filter(bill => {
+      return bill.paid === true;
     });
 
-    if (unpaidBills.length === 0) {
-      return <div />;
+    if (paidBills.length === 0) {
+      return <h3>There are no paid bills</h3>;
     }
 
     const billTableData = {};
 
-    for (const bill of unpaidBills) {
+    for (const bill of paidBills) {
       billTableData[bill.index] = [bill.createdAt, bill.paid ? "Paid" : "Unpaid", bill.biller, bill.amount];
     }
 
     const tableProps = {
       headerLabels: ["Date", "Status", "Biller", "Amount"],
-      actionRow: true,
-      actionHeaderLabel: "Actions",
-      actionButtonLabel: "Pay",
-      actionButtonIcon: "money",
-      actionButtonColor: "green",
-      tableData: billTableData,
-      actionButtonHandler: this.props.approveBill
+      actionRow: false,
+      tableData: billTableData
     };
 
     return <BaseTable {...tableProps} />;
