@@ -11,7 +11,7 @@ export class MainPage extends Web3Component {
   public render() {
     return (
       <Grid columns={2}>
-        <Grid.Column width={8}>
+        <Grid.Column width={8} id="merchantFlowDiv">
           <Container textAlign="center">
             <Card>
               <Card.Content>
@@ -33,7 +33,7 @@ export class MainPage extends Web3Component {
           </Container>
         </Grid.Column>
 
-        <Grid.Column width={8}>
+        <Grid.Column width={8} id="customerFlowDiv">
           <Container textAlign="center">
             <Card>
               <Card.Content>
