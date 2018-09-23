@@ -10,6 +10,7 @@ declare global {
 }
 export class Web3Component<P = {}, S = {}, SS = any> extends React.Component<P, S, SS> {
   public web3: Web3;
+  public wss: Web3;
 
   public getWeb3() {
     if (window.web3) {
@@ -19,6 +20,13 @@ export class Web3Component<P = {}, S = {}, SS = any> extends React.Component<P, 
       this.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
     }
     return this.web3;
+  }
+
+  public getWss() {
+    if (!this.wss) {
+      this.wss = new Web3(new Web3.providers.WebsocketProvider("ws://localhost:8545"));
+    }
+    return this.wss;
   }
 
   public getAccounts() {
@@ -44,10 +52,26 @@ export class Web3Component<P = {}, S = {}, SS = any> extends React.Component<P, 
     ) as BillableWalletTypes.Factory;
   }
 
+
+  public getWssWalletFactory() {
+    const web3 = this.getWss();
+    const contractAddress = process.env.REACT_APP_BILLABLE_WALLET_FACTORY || Contracts.BillableWalletFactory.address;
+    return new web3.eth.Contract(
+      Contracts.BillableWalletFactory.spec.abi,
+      contractAddress
+    ) as BillableWalletTypes.Factory;
+  }
+
   public getBillableWallet(address: string) {
     const web3 = this.getWeb3();
     return new web3.eth.Contract(Contracts.BillableWallet.spec.abi, address) as BillableWalletTypes.Wallet;
   }
+
+  public getWssBillableWallet(address: string) {
+    const web3 = this.getWss();
+    return new web3.eth.Contract(Contracts.BillableWallet.spec.abi, address) as BillableWalletTypes.Wallet;
+  }
+
 
   public async getMyBillableWalletAddress(): Promise<string> {
     const accounts = await this.getAccounts();

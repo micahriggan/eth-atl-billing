@@ -4,6 +4,7 @@ import { Menu, Segment } from "semantic-ui-react";
 import { BaseTable, ITableData } from "../BaseTable/BaseTable";
 import { BillCustomerModal } from "../BillCustomerModal/BillCustomerModal";
 import { Layout } from "../Layout";
+import { Web3Component } from "../Web3Component";
 
 export interface IProps {
   authorizedBillData: ITableData;
@@ -17,12 +18,13 @@ interface IState {
   activeModelData?: Array<string | number>;
 }
 
-export class MerchantDashboard extends React.Component<IProps> {
+export class MerchantDashboard extends Web3Component<IProps> {
   public state: IState = { activeItem: "authorizations", openModal: false };
   public constructor(props: IProps) {
     super(props);
     this.onSubmitBill = this.onSubmitBill.bind(this);
   }
+
 
   public showModal = (rowData: Array<string | number>) => this.setState({ openModal: true, activeModelData: rowData });
   public hideModel = () => this.setState({ openModal: false, activeModelData: null });
