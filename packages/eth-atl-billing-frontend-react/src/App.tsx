@@ -5,8 +5,8 @@ import { Route, Router, Switch } from "react-router-dom";
 import "./App.css";
 import { CustomerDashboard } from "./components/CustomerDashboard/CustomerDashboard";
 import { MainPage } from "./components/MainPage/MainPage";
-import { MerchantDashboardContainer } from "./containers/MerchantDashboard/MerchantDashboard";
 import { DepositContainer } from "./containers/deposit/Deposit";
+import { MerchantDashboardContainer } from "./containers/MerchantDashboard/MerchantDashboard";
 import { WithdrawContainer } from "./containers/withdraw/Withdraw";
 
 const customHistory = createBrowserHistory();
