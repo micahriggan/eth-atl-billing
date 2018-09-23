@@ -1,14 +1,10 @@
-/*
- *import { Redirect } from "react-router";
- */
 import { Grid, Header, Menu, Segment } from "semantic-ui-react";
 import { TOKENS } from "../../constants/Eth";
 import { CreateWalletButton } from "../../containers/CreateWalletButton";
 import { PendingBillsContainer } from "../../containers/pending-bills/PendingBills";
 import { Layout } from "../Layout";
-// import { Redirect } from "react-router";
+import { Redirect } from "react-router";
 import * as React from "react";
-import { Recurrence } from "../Recurrence/Recurrence";
 import { Web3Component } from "../Web3Component";
 
 interface IState {
