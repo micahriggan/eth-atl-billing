@@ -5,6 +5,8 @@ You will need two terminals
 terminal 1
 
 ```
+npm install
+./build.sh
 cd packages/eth-atl-billing-contracts
 npm run serve
 ```
