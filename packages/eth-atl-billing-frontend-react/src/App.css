@@ -32,3 +32,7 @@
   font-size: 20px;
   font-weight: 700;
 }
+
+.no-border-radius {
+  border-radius: 0px !important;
+}
