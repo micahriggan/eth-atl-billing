@@ -1,7 +1,8 @@
 import * as React from "react";
-import { Button, Table } from 'semantic-ui-react'
+import { Button, Table } from "semantic-ui-react";
 import { Web3Component } from "../../components/Web3Component";
 import { TOKENS } from "../../constants/Eth";
+import { Recurrence } from "../../components/Recurrence/Recurrence";
 
 interface IProps {
   walletAddress: string;
@@ -33,8 +34,9 @@ export class AddBillerContainer extends Web3Component<IProps, IState> {
     this.setState({ authorizedAmount: event.target.value });
   }
 
-  public handleAuthorizedFrequencyChange(event: React.ChangeEvent<HTMLInputElement>) {
-    this.setState({ authorizedFrequency: event.target.value });
+  public handleAuthorizedFrequencyChange(data: string) {
+    console.log(data);
+    this.setState({ authorizedFrequency: data });
   }
 
   public async authorizeBiller() {
@@ -57,13 +59,15 @@ export class AddBillerContainer extends Web3Component<IProps, IState> {
 
         <Table.Body>
           <Table.Row>
-            <Table.Cell><input onChange={this.handleBillerAddressChange} value={this.state.biller} /></Table.Cell>
-            <Table.Cell><input
-              onChange={this.handleAuthorizedAmountChange}
-              value={this.state.authorizedAmount} /></Table.Cell>
-            <Table.Cell><input
-              onChange={this.handleAuthorizedFrequencyChange}
-              value={this.state.authorizedFrequency} /></Table.Cell>
+            <Table.Cell>
+              <input onChange={this.handleBillerAddressChange} value={this.state.biller} />
+            </Table.Cell>
+            <Table.Cell>
+              <input onChange={this.handleAuthorizedAmountChange} value={this.state.authorizedAmount} />
+            </Table.Cell>
+            <Table.Cell>
+              <Recurrence onChange={this.handleAuthorizedFrequencyChange} />
+            </Table.Cell>
           </Table.Row>
           <Table.Row>
             <Table.Cell />
@@ -76,5 +80,5 @@ export class AddBillerContainer extends Web3Component<IProps, IState> {
         </Table.Body>
       </Table>
     );
-  };
+  }
 }
