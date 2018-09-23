@@ -90,7 +90,7 @@ export class MerchantDashboard extends Web3Component<IProps> {
       return;
     }
     const tableProps = {
-      headerLabels: ["Date", "Customer", "Amount"],
+      headerLabels: ["Date", "Customer", "Amount", "Paid"],
       actionRow: false,
       tableData: this.props.pastBillData
     };

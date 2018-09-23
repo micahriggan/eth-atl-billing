@@ -87,6 +87,7 @@ contract BillableWallet {
       paid: false,
       token: token
     }));
+    wFactory.emitBill(msg.sender, address(this), bills.length - 1);
     if(authorizedFor(amount, msg.sender, token) && getBalance(token) >= amount) {
       require(markPaid(bills.length -1), "Saving payment failed");
       require(internalSend(msg.sender, amount, token), "Payment must succeed");
@@ -110,12 +111,12 @@ contract BillableWallet {
 
   function authorize(address biller, uint amount, uint waitTime, address token ) public ownerOnly {
     billerTokenAuthorizations[biller][token] = Authorization(amount, waitTime);
-    wFactory.emitBillerAuthorization(biller, amount, token, true);
+    wFactory.emitBillerStateChange(biller, amount, token, true);
   }
 
   function revoke(address biller, address token) public ownerOnly {
     billerTokenAuthorizations[biller][token] = Authorization(0, 0);
-    wFactory.emitBillerAuthorization(biller, 0, token, false);
+    wFactory.emitBillerStateChange(biller, 0, token, false);
   }
 
   function transfer(address to, uint amount, address token) public ownerOnly {
