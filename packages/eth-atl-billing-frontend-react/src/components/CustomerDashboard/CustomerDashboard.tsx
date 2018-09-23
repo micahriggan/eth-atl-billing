@@ -1,14 +1,10 @@
-import * as React from "react";
-
-/*
- *import { Redirect } from "react-router";
- */
-import { Redirect } from "react-router";
 import { Grid, Header, Menu, Segment } from "semantic-ui-react";
 import { TOKENS } from "../../constants/Eth";
 import { CreateWalletButton } from "../../containers/CreateWalletButton";
 import { PendingBillsContainer } from "../../containers/pending-bills/PendingBills";
 import { Layout } from "../Layout";
+import { Redirect } from "react-router";
+import * as React from "react";
 import { Web3Component } from "../Web3Component";
 
 interface IState {
@@ -17,6 +13,7 @@ interface IState {
   loading: boolean;
   section: string;
 }
+
 export class CustomerDashboard extends Web3Component<any, IState> {
   public state: IState = {
     balance: "0",
@@ -24,6 +21,7 @@ export class CustomerDashboard extends Web3Component<any, IState> {
     section: "",
     walletAddress: ""
   };
+
   public constructor(props: any) {
     super(props);
     this.setSection = this.setSection.bind(this);
