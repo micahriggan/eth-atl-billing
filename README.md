@@ -1,6 +1,6 @@
 # Getting Started
 
-You will need three terminals
+You will need two terminals
 
 terminal 1
 
