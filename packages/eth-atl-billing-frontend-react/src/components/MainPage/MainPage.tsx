@@ -10,7 +10,9 @@ export class MainPage extends Web3Component {
 
   public render() {
     return (
-      <Grid columns={2}>
+      <Grid columns={2} className="centered-main-container">
+          <div className="centered-container">
+              <div className="main-title">BillPay</div>
         <Grid.Column width={8} id="merchantFlowDiv">
           <Container textAlign="center">
             <Card>
@@ -54,6 +56,7 @@ export class MainPage extends Web3Component {
             </Card>
           </Container>
         </Grid.Column>
+          </div>
       </Grid>
     );
   }

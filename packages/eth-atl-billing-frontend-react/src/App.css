@@ -132,3 +132,26 @@ div.ui.dashboard-header-label {
     top: 200px;
     right: 50px;
 }
+
+.centered-main-container {
+    position:relative !important;
+    top: 150px;
+    left: 410px;
+}
+
+.centered-container {
+    align-items: center !important;
+    justify-content: center !important;
+    display: flex !important;
+}
+
+.main-title {
+    font-size: 60px;
+    color:white;
+    font-weight:700;
+    display: flex;
+    justify-content: center;
+    align-items: center !important;
+    width:100vh;
+    font-style: italic;
+}

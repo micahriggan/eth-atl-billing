@@ -116,14 +116,15 @@ export class CustomerDashboard extends Web3Component<any, IState> {
           <Segment>
             <Grid centered={true} columns={4}>
               <Grid.Row>
-                <Header size="huge">Deposit Address: {this.state.walletAddress}</Header>
+                  <div className="dashboard-header-label ui">Deposit Address:&nbsp;&nbsp;</div>
+                <Header className="wallet-address-dashboard no-margin-top">{this.state.walletAddress}</Header>
               </Grid.Row>
 
               <Grid.Column>
                 <Header id="balanceHeader" size="huge" className="container-header-text">Current Balance </Header>
               </Grid.Column>
                 <Grid.Row>
-                    <Header id="balanceNum">{this.state.balance}</Header>&nbsp;ETH
+                    <Header id="balanceNum">{this.state.balance}</Header>&nbsp; WEI
                 </Grid.Row>
                 <Grid.Row centered={true} columns={8}>
                 <Grid.Column>
