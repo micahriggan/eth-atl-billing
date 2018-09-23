@@ -23,7 +23,7 @@ export interface BillerProfile {
 }
 interface IProps {
   bills: IBill[];
-  approveBill: (data: any) => void;
+  approveBill: (data: any, index: number) => void;
 }
 export class PendingBills extends Web3Component<IProps> {
   public static getBillComponent(bill: IBill) {
