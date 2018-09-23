@@ -105,9 +105,9 @@ export class CustomerDashboard extends Web3Component<any, IState> {
           <Segment>
             <Grid centered={true} columns={4}>
               <Grid.Column>
-                <Header size="huge">Balance: {this.state.balance}</Header>
+                <Header size="huge" className="container-header-text">Balance: {this.state.balance}</Header>
               </Grid.Column>
-              <Grid.Row centered={true} columns={8}>
+                <Grid.Row centered={true} columns={8}>
                 <Grid.Column>
                   <button className="ui button" role="button" onClick={setSection("DEPOSIT")}>
                     DEPOSIT
