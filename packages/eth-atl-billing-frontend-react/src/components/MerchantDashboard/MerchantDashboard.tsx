@@ -21,6 +21,7 @@ export class MerchantDashboard extends React.Component<IProps> {
   public state: IState = { activeItem: "authorizations", openModal: false };
   public constructor(props: IProps) {
     super(props);
+    this.onSubmitBill = this.onSubmitBill.bind(this);
   }
 
   public showModal = (rowData: Array<string | number>) => this.setState({ openModal: true, activeModelData: rowData });
@@ -34,7 +35,8 @@ export class MerchantDashboard extends React.Component<IProps> {
     return (
       <Layout>
         <BillCustomerModal
-          submitBill={this.props.submitBill}
+          // submitBill={this.props.submitBill}
+          submitBill={this.onSubmitBill}
           close={this.hideModel}
           open={this.state.openModal}
           data={this.state.activeModelData}
@@ -47,6 +49,11 @@ export class MerchantDashboard extends React.Component<IProps> {
         <Segment attached="bottom">{this.privateTableSwitcherComponent()}</Segment>
       </Layout>
     );
+  }
+
+  public onSubmitBill(data: any) {
+    this.setState({ openModal: false });
+    this.props.submitBill(data);
   }
 
   public privateTableSwitcherComponent() {
@@ -64,7 +71,7 @@ export class MerchantDashboard extends React.Component<IProps> {
       return;
     }
     const tableProps = {
-      headerLabels: ["Customer", "Amount", "Frequency"],
+      headerLabels: ["Customer", "Address", "Amount", "Frequency"],
       actionHeaderLabel: "Actions",
       actionRow: true,
       actionButtonLabel: "Bill",
