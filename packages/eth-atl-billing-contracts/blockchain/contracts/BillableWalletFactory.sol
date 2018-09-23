@@ -9,7 +9,7 @@ contract BillableWalletFactory {
   mapping(address => bool) isWallet;
   address owner;
 
-  event BillerState(address indexed biller, address wallet, uint amount, address token, bool authorized);
+  event BillerState(address indexed biller, address indexed wallet, uint amount, address token, bool authorized);
   event Bill(address indexed biller, address wallet,  uint billIndex);
 
   constructor() public {
@@ -32,10 +32,11 @@ contract BillableWalletFactory {
     emit BillerState(biller, msg.sender, amount, token, authorized);
   }
 
-  function emitBill(address biller, address wallet, uint billIndex) public onlyWallet {
+  function emitBill(address biller, uint billIndex) public onlyWallet {
     emit Bill(biller, msg.sender, billIndex);
   }
 
 
 }
+
 

@@ -101,16 +101,16 @@ i.large-user-type {
 
 .wallet-address-dashboard {
     color: #888888!important;
-    font-weight:200;
+    font-weight:200 !important;
     font-size: 1em!important;
-    font-style:italic;
+    font-style:italic !important;
 }
 
 div.ui.dashboard-header-label {
-    vertical-align: middle;
+    vertical-align: middle !important;
     font-size: 1.1em!important;
-    text-transform: uppercase;
-    font-weight:200;
+    text-transform: uppercase !important;
+    font-weight:200 !important;
 }
 
 .ui.centered.four.column.grid {

@@ -29,21 +29,14 @@ export class MerchantDashboardContainer extends Web3Component<any, IState> {
     const accounts = await this.getAccounts();
     const filter = { biller: accounts[0] };
     this.getWssWalletFactory().getPastEvents("Bill", { fromBlock: 0, filter }, async (err, events) => {
-      console.log(events);
       for (const event of events) {
         const prevPast = this.state.past;
         const wallet = event.returnValues.wallet;
-
-        /*
-       *kughiuyui: ["August 1st, 2018 at 12pm", "Micah", "$9.95"],
-       */
-
         const billableWallet = this.getBillableWallet(wallet);
         const bill = await billableWallet.methods.bills(event.returnValues.billIndex).call();
         const amount = bill[0];
         const createdAt = Number(bill[2]) * 1000;
         const paid = bill[3] ? "Paid" : "Unpaid";
-        console.log(bill);
         const past = Object.assign({}, prevPast, {
           [event.transactionHash]: [new Date(createdAt).toString(), wallet, amount, paid]
         });

@@ -20,7 +20,7 @@ export class MainPage extends Web3Component {
                 <Card.Description>I want to manage my bills.</Card.Description>
               </Card.Content>
               <Card.Content extra={true}>
-                  <Link to="/merchant">
+                  <Link to="/customer">
                   <div className="ui animated basic blue button">
                       <div className="visible content">Manage Clients</div>
                       <div className="hidden content">
@@ -42,7 +42,7 @@ export class MainPage extends Web3Component {
                 <Card.Description>I want to bill and accept payments.</Card.Description>
               </Card.Content>
               <Card.Content extra={true}>
-                  <Link to="/customer">
+                  <Link to="/merchant">
                   <div className="ui animated basic blue button">
                       <div className="visible content">Pay Bills</div>
                       <div className="hidden content">
