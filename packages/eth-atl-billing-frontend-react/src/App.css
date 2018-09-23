@@ -13,10 +13,15 @@ body {
     font-style: italic;
 }
 
-div.menu.compact.top.attached {
-    /*
-    background: linear-gradient(to bottom, rgba(30,87,153,1) 0%,rgba(41,137,216,1) 50%,rgba(32,124,202,1) 51%,rgba(125,185,232,1) 100%);
-    */
+div.menu.tabular.top.attached > a.item.active {
+    background-color:#FAFAFA;
+    color: #5959FF;
+    font-weight:700;
+}
+
+div.menu.tabular.top.attached > a.item:not(.active) {
+    background-color:#CCCCCC;
+    font-weight:300;
 }
 
 .container-header-text{
@@ -29,8 +34,8 @@ div.ui.segment {
 }
 
 i.large-user-type {
-    width: 20px;
-    height: 20px;
+    font-size: 24px;
+    height: 32px;
 }
 
 .App-logo {
