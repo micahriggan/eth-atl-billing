@@ -43,9 +43,9 @@ contract BillableWallet {
   function authorizedFor(uint amount, address biller, address token) view public returns(bool) {
     BillerProfile storage billerProfile = billerTokenProfiles[biller][token];
     Authorization storage auth = billerTokenAuthorizations[biller][token];
-    uint lastBillTime = billerProfile.lastBilled;
+    uint lastPaidTime = billerProfile.lastPaid;
     uint waitTime = auth.waitTime;
-    uint minTime = lastBillTime + waitTime;
+    uint minTime = lastPaidTime + waitTime;
     return now >= minTime && amount <= auth.amount;
   }
 
