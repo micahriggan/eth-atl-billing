@@ -9,24 +9,33 @@ interface IState {
   past: ITableData;
 }
 export class MerchantDashboardContainer extends Web3Component<any, IState> {
-  // TODO: fix any
   public state: IState = {
     authorizations: {
-        contract1: ['Micah', '$10.00', 'monthly']
+      contract1: ["Micah", "$10.00", "monthly"]
     },
     past: {
-        contract1: ["August 1st, 2018 at 12pm", "Micah", "$9.95" ],
-        contract2: ["July 1st, 2018 at 12pm", "Micah", "$9.95" ]
+      contract1: ["August 1st, 2018 at 12pm", "Micah", "$9.95"],
+      contract2: ["July 1st, 2018 at 12pm", "Micah", "$9.95"]
     }
   };
+  // TODO: fix any
   public constructor(props: any) {
     super(props);
+  }
+
+  // TODO: fix any
+  public submitBill(data: any) {
+    console.log(data);
   }
 
   public render() {
     return (
       <div>
-        <MerchantDashboard authorizedBillData={this.state.authorizations} pastBillData={this.state.past} />
+        <MerchantDashboard
+          submitBill={this.submitBill}
+          authorizedBillData={this.state.authorizations}
+          pastBillData={this.state.past}
+        />
       </div>
     );
   }

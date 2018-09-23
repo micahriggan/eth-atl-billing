@@ -2,22 +2,29 @@ import * as React from "react";
 
 import { Menu, Segment } from "semantic-ui-react";
 import { BaseTable, ITableData } from "../BaseTable/BaseTable";
+import { BillCustomerModal } from "../BillCustomerModal/BillCustomerModal";
 import { Layout } from "../Layout";
 
 export interface IProps {
   authorizedBillData: ITableData;
   pastBillData: ITableData;
+  submitBill: (billData: { billAmount: number; data: any }) => void;
 }
 
 interface IState {
   activeItem: string;
+  openModal: boolean;
+  activeModelData?: Array<string | number>;
 }
 
 export class MerchantDashboard extends React.Component<IProps> {
-  public state: IState = { activeItem: "authorizations" };
+  public state: IState = { activeItem: "authorizations", openModal: false };
   public constructor(props: IProps) {
     super(props);
   }
+
+  public showModal = (rowData: Array<string | number>) => this.setState({ openModal: true, activeModelData: rowData });
+  public hideModel = () => this.setState({ openModal: false, activeModelData: null });
 
   public handleItemClick = (e: any, value: { name: string }) => this.setState({ activeItem: value.name });
 
@@ -26,6 +33,12 @@ export class MerchantDashboard extends React.Component<IProps> {
 
     return (
       <Layout>
+        <BillCustomerModal
+          submitBill={this.props.submitBill}
+          close={this.hideModel}
+          open={this.state.openModal}
+          data={this.state.activeModelData}
+        />
         <Menu attached="top" tabular={true}>
           <Menu.Item name="authorizations" active={activeItem === "authorizations"} onClick={this.handleItemClick} />
           <Menu.Item name="past" active={activeItem === "past"} onClick={this.handleItemClick} />
@@ -57,6 +70,7 @@ export class MerchantDashboard extends React.Component<IProps> {
       actionButtonLabel: "Bill",
       actionButtonIcon: "money",
       actionButtonColor: "green",
+      actionButtonHandler: this.showModal,
       tableData: this.props.authorizedBillData
     };
     return <BaseTable {...tableProps} />;
