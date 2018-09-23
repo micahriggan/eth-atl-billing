@@ -53,7 +53,7 @@ export class MerchantDashboardContainer extends Web3Component<any, IState> {
         const prevAuthorizations = this.state.authorizations;
         const wallet = event.returnValues.wallet;
         const authorizations = Object.assign({}, prevAuthorizations, {
-          [event.transactionHash]: ["", wallet, event.returnValues.amount, "monthly"]
+          [event.transactionHash]: ["Your Customer", wallet, event.returnValues.amount, "monthly"]
         });
         this.setState({ authorizations });
       }
