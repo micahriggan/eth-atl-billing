@@ -86,7 +86,7 @@ export class CustomerDashboard extends Web3Component<any, IState> {
     await tx;
     setTimeout(() => {
       this.initState();
-    }, 5000);
+    }, 1000);
   }
   public getCreateWalletSection() {
     return <CreateWalletButton onClick={this.handleWalletCreation} />;
