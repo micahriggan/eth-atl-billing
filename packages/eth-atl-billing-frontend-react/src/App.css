@@ -124,13 +124,13 @@ div.ui.dashboard-header-label {
 #merchantFlowDiv {
     position: absolute !important;
     top: 200px;
-    left:50px;
+    left:0px;
 }
 
 #customerFlowDiv {
     position: absolute !important;
     top: 200px;
-    right: 50px;
+    right: 0px;
 }
 
 .centered-main-container {
